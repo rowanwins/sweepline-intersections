@@ -56,9 +56,11 @@ Removing the tree structure greatly simplifies the code. The tree structure is r
 The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance is typically faster than bentley-ottmann.
 
 ### Algorithm Steps
-1. Vertices are entered into a priority queue sorted from left to right
-2. An item is removed from the priority queue
-  - If the vertex is the left endpoint of a segment we test it against every other segment in the segment queue for intersections with any intersections recorded. We then add the vertex (and it's associated right endpoint) to the segment queue.
-  - When we encounter a right endpoint we remove the first item from the segment queue.
+- Vertices are entered into a priority queue sorted from left to right
+- An empty priority queue is created to store segments encountered
+- An item is removed from the priority queue
+    - If the vertex is the left endpoint of a segment we test it against every other segment in the segment queue for intersections with any intersection recorded. We then add the vertex (and it's associated right endpoint) to the segment queue.
+    - When we encounter a right endpoint we remove the first item from the segment queue.
 
+Each pair of segments are only tested once. And only segments that overlap on the x plane are tested against each other.
 
