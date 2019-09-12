@@ -1,0 +1,22 @@
+{
+  "type": "Feature",
+  "properties": {
+      "expectedIntersections": 1
+  },
+  "geometry": {
+    "type":"Polygon",
+    "coordinates":[
+        [
+            [233,115],
+            [190,186],
+            [247,260],
+            [430,304],
+            [531,244],
+            [510,170],
+            [415,104],
+            [553,196],
+            [233,115]
+        ]
+    ]
+  }
+}
