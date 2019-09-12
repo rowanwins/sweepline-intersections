@@ -8,6 +8,7 @@ const loadJsonFile = require('load-json-file')
 
 const regression = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'example1.geojson'))
 const switzerland = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
+const chile = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'simple', 'chile.geojson'))
 
 const options = {
     onStart () { console.log(this.name) },
@@ -59,3 +60,17 @@ suite2
     })
     .run()
 
+
+// Chile - Vertical geometry
+// bentleyOttmann x 288,131 ops/sec ±0.60% (95 runs sampled)
+// sweepline x 471,047 ops/sec ±1.39% (94 runs sampled)
+// - Fastest is sweepline
+const suite3 = new Benchmark.Suite('Chile - Vertical geometry', options)
+suite3
+    .add('bentleyOttmann', function () {
+        bentleyOttmann(chile)
+    })
+    .add('sweepline', function () {
+        sweepline(chile)
+    })
+    .run()

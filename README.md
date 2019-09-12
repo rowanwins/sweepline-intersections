@@ -55,6 +55,8 @@ Removing the tree structure greatly simplifies the code. The tree structure is r
 
 The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance is typically faster than bentley-ottmann.
 
+I did have some concerns that a really vertical geometry (eg think of the border of the Chile) would not perform well but it still beat the bentley ottman implementation.
+
 ### Algorithm Steps
 - Vertices are entered into a priority queue sorted from left to right
 - An empty priority queue is created to store segments encountered
