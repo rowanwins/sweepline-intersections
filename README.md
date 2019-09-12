@@ -53,7 +53,7 @@ The basic concept of this algorithm is based on a sweepline. Where this algorith
 
 Removing the tree structure greatly simplifies the code. The tree structure is replaced with a priority queue of segments which is sorted by the x vertex of the right endpoint of the segments. A priority queue is already used to sort the vertices which means only 1 data structure is required.
 
-The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance 
+The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance is typically faster than bentley-ottmann.
 
 ### Algorithm Steps
 1. Vertices are entered into a priority queue sorted from left to right
