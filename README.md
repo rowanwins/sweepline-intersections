@@ -14,7 +14,7 @@ Valid inputs: Geojson `Polygon`, `MultiPolygon`, `LineString`, `MultiLineString`
 
     const box = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]]}
     findIntersections(box)
-    // returns array os intersection points
+    // returns array of intersection points
 
 ````
 
@@ -61,8 +61,7 @@ I did have some concerns that a really vertical geometry (eg think of the border
 - Vertices are entered into a priority queue sorted from left to right
 - An empty priority queue is created to store segments encountered
 - An item is removed from the priority queue
-    - If the vertex is the left endpoint of a segment we test it against every other segment in the segment queue for intersections with any intersection recorded. We then add the vertex (and it's associated right endpoint) to the segment queue.
+    - If the vertex is the left endpoint of a segment, we test it against every other segment in the segment queue for intersections with any intersection recorded. We then add the vertex (and it's associated right endpoint) to the segment queue.
     - When we encounter a right endpoint we remove the first item from the segment queue.
 
 Each pair of segments are only tested once. And only segments that overlap on the x plane are tested against each other.
-
