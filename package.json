@@ -1,6 +1,6 @@
 {
   "name": "sweepline-intersections",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module to check if a polygon self-intersects using a sweepline algorithm",
   "main": "dist/sweeplineIntersections.js",
   "module": "dist/sweeplineIntersections.esm.js",
@@ -55,5 +55,12 @@
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rowanwins/sweepline-intersections.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rowanwins/sweepline-intersections/issues"
   }
 }
