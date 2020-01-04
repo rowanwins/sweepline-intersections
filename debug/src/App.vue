@@ -5,7 +5,6 @@
 <script>
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import 'leaflet-polylinedecorator'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
@@ -20,9 +19,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow
 })
 
-// const trouble = require('../../test/fixtures/notSimple/switzerlandKinked.geojson')
-// const trouble = require('../../test/fixtures/notSimple/superbad.geojson')
-const trouble = require('../../test/fixtures/notSimple/example.geojson')
+const trouble = require('../../test/fixtures/simple/MultiLinestring.geojson')
 
 export default {
     name: 'App',

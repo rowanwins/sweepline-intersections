@@ -1,9 +1,9 @@
 {
   "name": "sweepline-intersections",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A module to check if a polygon self-intersects using a sweepline algorithm",
   "main": "dist/sweeplineIntersections.js",
-  "module": "src/main.js",
+  "module": "dist/sweeplineIntersections.esm.js",
   "unpkg": "dist/sweeplineIntersections.min.js",
   "jsdelivr": "dist/sweeplineIntersections.min.js",
   "scripts": {
@@ -11,13 +11,11 @@
     "build": "rollup -c",
     "build:debug": "cross-env webpack --config debug/webpack.config.js --mode production",
     "debug": "cross-env webpack-dev-server --config debug/webpack.config.js --mode development --open --hot",
-    "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "ava --verbose",
-    "test:e2e": "ava ./test/test.e2e.js --verbose",
-    "test:coverage": "nyc npm run test:unit"
+    "test": "ava --verbose"
   },
   "ava": {
     "files": [
+      "test/test.e2e.js",
       "test/*.spec.js"
     ],
     "require": [

@@ -5,15 +5,13 @@ import {checkWhichEventIsLeft, checkWhichSegmentHasRightEndpointFirst} from './c
 import {fillEventQueue} from './fillQueue'
 import {testSegmentIntersect} from './utils'
 
-import {debugEventAndSegments, debugRemovingSegment} from './debug'
+// import {debugEventAndSegments, debugRemovingSegment} from './debug'
 
 export default function bentleyOttmann (geojson) {
     const intersectionPoints = []
     const eventQueue = new TinyQueue([], checkWhichEventIsLeft);
 
     fillEventQueue(geojson, eventQueue)
-
-    let currentSegment = null
 
     const outQueue = new TinyQueue([], checkWhichSegmentHasRightEndpointFirst);
 
