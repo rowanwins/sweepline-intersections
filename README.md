@@ -1,22 +1,58 @@
 # sweepline-intersections
-A small module using a sweepline algorithm to detect self-intersections in polygons or polylines.
+A small and fast module using a sweepline algorithm to detect intersections between polygons and/or polylines.
 
-## Install
+## Documentation
+
+### Install
 ````
 npm install sweepline-intersections
 ````
 
-## Documentation
-Valid inputs: Geojson `Polygon`, `MultiPolygon`, `LineString`, `MultiLineString`
+### Basic Use
+Valid inputs: Geojson `Feature` or `Geometry` including `Polygon`, `LineString`, `MultiPolygon`, `MultiLineString`, as well as `FeatureCollection`'s.
+
+Returns an array[{x, y}] of intersection points
 
 ````js
     const findIntersections = require('sweepline-intersections')
 
     const box = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]]}
-    findIntersections(box)
-    // returns array of intersection points
-
+    const intersections = findIntersections(box)
+    // returns an array of intersection points
 ````
+
+### Complex Use
+This library also provide a class-based approach which is helpful if you need to check multiple geometries against a single geometry. This allows you to save the state of the initial event queue with the primary geometry.
+
+````js
+    import SweeplineIntersectionsClass from 'sweepline-intersections/dist/SweeplineIntersectionsClass'
+
+    // create the base instance
+    const sl = new SweeplineIntersectionsClass()
+    // populate the event queue with your primary geometry
+    sl.addData(largeGeoJson)
+    // clone the event queue in the original state so you can reuse it
+    const origQueue = sl.cloneEventQueue()
+
+    // now you can iterate through some other set of features saving
+    // the overhead of having to populate the complete queue multiple times
+    someOtherFeatureCollection.features.forEach(feature => {
+        // add another feature to test against your original data
+        sl.addData(feature, origQueue)
+        // check if those two features intersect
+        const intersectionPoints = sl.getIntersections()
+    })
+````
+
+#### API
+`new SweeplineIntersectionsClass()` - creates a new instance
+
+`.addData(geojson, existingQueue)` - add geojson to the event queue. The second argument for an `existingQueue` is optional, and takes a queue generated from `.cloneEventQueue()`
+
+`.cloneEventQueue()` - clones the state of the existing event queue that's been populated with geojson. Returns a queue that you can pass to the `addData` method
+
+`.intersect()` - Checks for segment intersections. Returns `true` if there are no segment intersections or `false` if there are intersections.
+
 
 ## Benchmarks
 Tested against 
@@ -29,13 +65,18 @@ Tested against
 // bentleyOttmann x 2,010 ops/sec ±1.52% (89 runs sampled)
 // sweepline x 2,621 ops/sec ±0.29% (95 runs sampled)
 // isects x 14.29 ops/sec ±2.16% (40 runs sampled)
-// - Fastest is sweepline
+// - Fastest is sweepline (this library)
 
 // Simple Case (6 vertices)
 // gpsi x 246,512 ops/sec ±1.23% (90 runs sampled)
 // bentleyOttmann x 546,326 ops/sec ±0.66% (92 runs sampled)
 // sweepline x 1,157,425 ops/sec ±1.04% (94 runs sampled)
-// - Fastest is sweepline
+// - Fastest is sweepline (this library)
+
+// Chile - Vertical geometry (17,000 vertices)
+// bentleyOttmann x 50.22 ops/sec ±1.75% (65 runs sampled)
+// sweepline x 35.64 ops/sec ±1.20% (62 runs sampled)
+// - Fastest is bentleyOttmann (although it doesn't find intersection)
 ````
 
 ## Contributing
@@ -53,9 +94,10 @@ The basic concept of this algorithm is based on a sweepline. Where this algorith
 
 Removing the tree structure greatly simplifies the code. The tree structure is replaced with a priority queue of segments which is sorted by the x vertex of the right endpoint of the segments. A priority queue is already used to sort the vertices which means only 1 data structure is required.
 
-The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance is typically faster than bentley-ottmann.
+The package size of this module is 3kb compared to my implementation of the bentley-ottmann algorithm which is 16kb while performance is typically faster than bentley-ottmann. 
 
-I did have some concerns that a really vertical geometry (eg think of the border of the Chile) would not perform well but it still beat the bentley ottman implementation.
+Bentley-ottman only outperforms this library when there are several thousands vertices, however I'm also less confident in the results of my bentley-ottman lib as it occassionally misses intersections and is much harder to write tests for due to the more complex logic.
+
 
 ### Algorithm Steps
 - Vertices are entered into a priority queue sorted from left to right

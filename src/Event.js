@@ -11,7 +11,7 @@ export default class Event {
         this.isLeftEndpoint = null
     }
 
-    isSamePoint(eventToCheck) {
+    isSamePoint (eventToCheck) {
         return this.p.x === eventToCheck.p.x && this.p.y === eventToCheck.p.y
     }
 }

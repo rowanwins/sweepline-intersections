@@ -6,3 +6,4 @@ yarn-debug.log*
 yarn-error.log*
 .nyc_output
 coverage
+package-lock.json
