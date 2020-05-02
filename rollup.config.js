@@ -1,7 +1,7 @@
-import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import strip from '@rollup/plugin-strip'
 import {terser} from 'rollup-plugin-terser'
-import strip from 'rollup-plugin-strip'
 
 const output = (file, format, plugins) => ({
     input: './src/main.js',

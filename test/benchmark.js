@@ -8,7 +8,7 @@ const loadJsonFile = require('load-json-file')
 
 const regression = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'example1.geojson'))
 const switzerland = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
-const chile = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'simple', 'chile.geojson'))
+const chile = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'chileKinked.geojson'))
 
 const options = {
     onStart () { console.log(this.name) },
@@ -41,7 +41,6 @@ suite
     })
     .run()
 
-
 // Simple Case (6 vertices)
 // gpsi x 246,512 ops/sec ±1.23% (90 runs sampled)
 // bentleyOttmann x 546,326 ops/sec ±0.66% (92 runs sampled)
@@ -60,12 +59,11 @@ suite2
     })
     .run()
 
-
-// Chile - Vertical geometry
-// bentleyOttmann x 288,131 ops/sec ±0.60% (95 runs sampled)
-// sweepline x 471,047 ops/sec ±1.39% (94 runs sampled)
-// - Fastest is sweepline
-const suite3 = new Benchmark.Suite('Chile - Vertical geometry', options)
+// Chile - Vertical geometry (17,000 vertices)
+// bentleyOttmann x 50.22 ops/sec ±1.75% (65 runs sampled)
+// sweepline x 35.64 ops/sec ±1.20% (62 runs sampled)
+// - Fastest is bentleyOttmann (although doesn't find intersection)
+const suite3 = new Benchmark.Suite('Chile - Vertical geometry (17,000 vertices)', options)
 suite3
     .add('bentleyOttmann', function () {
         bentleyOttmann(chile)
@@ -74,3 +72,4 @@ suite3
         sweepline(chile)
     })
     .run()
+
