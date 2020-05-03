@@ -11,7 +11,7 @@ npm install sweepline-intersections
 ### Basic Use
 Valid inputs: Geojson `Feature` or `Geometry` including `Polygon`, `LineString`, `MultiPolygon`, `MultiLineString`, as well as `FeatureCollection`'s.
 
-Returns an array[{x, y}] of intersection points
+Returns an array of intersection points eg, [[x1, y1], [x2, y2]] 
 
 ````js
     const findIntersections = require('sweepline-intersections')
