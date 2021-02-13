@@ -1,0 +1,19 @@
+{
+      "type": "Feature",
+      "properties": {
+        "expectedIntersections": 3
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [[
+            [7, 50],
+            [8, 50],
+            [9, 50]
+        ],
+        [
+            [8, 49],
+            [8, 50],
+            [8, 51]
+        ]]
+      }
+}

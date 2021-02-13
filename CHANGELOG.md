@@ -1,3 +1,6 @@
+## 1.2.0
+- Improve handling of detecting intersections across multiple rings  
+
 ## 1.1.2
 - Fixed up some typos in the documentation.
 

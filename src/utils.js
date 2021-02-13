@@ -5,10 +5,12 @@ export function areCoordsSame (p1, p2) {
 export function testSegmentIntersect (seg1, seg2) {
     if (seg1 === null || seg2 === null) return false
 
-    if (seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
+    if (seg1.leftSweepEvent.ringId === seg2.leftSweepEvent.ringId &&
+        (seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
+        seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
         seg1.rightSweepEvent.isSamePoint(seg2.rightSweepEvent) ||
         seg1.leftSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
-        seg1.leftSweepEvent.isSamePoint(seg2.rightSweepEvent)) return false
+        seg1.leftSweepEvent.isSamePoint(seg2.rightSweepEvent))) return false
 
     const x1 = seg1.leftSweepEvent.p.x
     const y1 = seg1.leftSweepEvent.p.y

@@ -11,6 +11,8 @@ export default function fillEventQueue (geojson, eventQueue) {
         processFeature(geojson, eventQueue)
     }
 }
+
+let ringId = 0
 function processFeature (featureOrGeometry, eventQueue) {
     const geom = featureOrGeometry.type === 'Feature' ? featureOrGeometry.geometry : featureOrGeometry
     let coords = geom.coordinates
@@ -22,12 +24,12 @@ function processFeature (featureOrGeometry, eventQueue) {
         for (let ii = 0; ii < coords[i].length; ii++) {
             let currentP = coords[i][ii][0]
             let nextP = null
-
+            ringId = ringId + 1
             for (let iii = 0; iii < coords[i][ii].length - 1; iii++) {
                 nextP = coords[i][ii][iii + 1]
 
-                const e1 = new Event(currentP)
-                const e2 = new Event(nextP)
+                const e1 = new Event(currentP, ringId)
+                const e2 = new Event(nextP, ringId)
 
                 e1.otherEvent = e2
                 e2.otherEvent = e1
