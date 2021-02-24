@@ -3,8 +3,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import strip from '@rollup/plugin-strip'
 import {terser} from 'rollup-plugin-terser'
 
-const output = (file, format, plugins) => ({
-    input: './src/main.js',
+const output = (input, file, format, plugins) => ({
+    input,
     output: {
         name: 'sweeplineIntersections',
         file,
@@ -15,20 +15,30 @@ const output = (file, format, plugins) => ({
 })
 
 export default [
-    output('./dist/sweeplineIntersections.js', 'umd', [
+    output('./src/main.js', './dist/sweeplineIntersections.js', 'umd', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
         resolve()
     ]),
-    output('./dist/sweeplineIntersections.esm.js', 'esm', [
+    output('./src/main.js', './dist/sweeplineIntersections.esm.js', 'esm', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
         resolve()
     ]),
-    output('./dist/sweeplineIntersections.min.js', 'umd', [
+    output('./src/main.js', './dist/sweeplineIntersections.min.js', 'umd', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
         resolve(),
         terser()
+    ]),
+    output('./src/SweeplineIntersections.js', './dist/SweeplineIntersectionsClass.js', 'umd', [
+        strip(['debugEventAndSegments', 'debugRemovingSegment']),
+        commonjs(),
+        resolve()
+    ]),
+    output('./src/SweeplineIntersections.js', './dist/SweeplineIntersectionsClass.esm.js', 'esm', [
+        strip(['debugEventAndSegments', 'debugRemovingSegment']),
+        commonjs(),
+        resolve()
     ])
 ]
