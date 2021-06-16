@@ -1,3 +1,9 @@
+## 1.3.1
+- Bug fix for unintended output.
+
+## 1.3.0
+- Add a second argument, `ignoreSelfIntersections` which only checks for intersections between different features.
+
 ## 1.2.2
 - Fix the missing dist files for the class-based approach 
 

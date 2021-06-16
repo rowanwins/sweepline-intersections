@@ -28,7 +28,7 @@ export default class SweeplineIntersections {
         return newQueue
     }
 
-    getIntersections () {
-        return runCheck(this._eventQueue)
+    getIntersections (ignoreSelfIntersections) {
+        return runCheck(this._eventQueue, ignoreSelfIntersections)
     }
 }

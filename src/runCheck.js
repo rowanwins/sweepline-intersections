@@ -5,7 +5,9 @@ import {checkWhichSegmentHasRightEndpointFirst} from './compareEvents'
 import {testSegmentIntersect} from './utils'
 // import {debugEventAndSegments, debugRemovingSegment} from './debug'
 
-export default function runCheck (eventQueue) {
+export default function runCheck (eventQueue, ignoreSelfIntersections) {
+    ignoreSelfIntersections = ignoreSelfIntersections ? ignoreSelfIntersections : false
+
     const intersectionPoints = []
     const outQueue = new TinyQueue([], checkWhichSegmentHasRightEndpointFirst)
 
@@ -15,7 +17,11 @@ export default function runCheck (eventQueue) {
             // debugEventAndSegments(event.p, outQueue.data)
             const segment = new Segment(event)
             for (let i = 0; i < outQueue.data.length; i++) {
-                const intersection = testSegmentIntersect(segment, outQueue.data[i])
+                const otherSeg = outQueue.data[i]
+                if (ignoreSelfIntersections) {
+                    if (otherSeg.leftSweepEvent.featureId === event.featureId) continue
+                }
+                const intersection = testSegmentIntersect(segment, otherSeg)
                 if (intersection !== false) intersectionPoints.push(intersection)
             }
             outQueue.push(segment)

@@ -1,7 +1,3 @@
-export function areCoordsSame (p1, p2) {
-    return Math.abs(p1 - p2) < Number.EPSILON
-}
-
 export function testSegmentIntersect (seg1, seg2) {
     if (seg1 === null || seg2 === null) return false
 

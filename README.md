@@ -9,7 +9,7 @@ npm install sweepline-intersections
 ````
 
 ### Basic Use
-Valid inputs: Geojson `Feature` or `Geometry` including `Polygon`, `LineString`, `MultiPolygon`, `MultiLineString`, as well as `FeatureCollection`'s.
+Valid inputs: Geojson `Feature` or `Geometry` including `Polygon`, `LineString`, `MultiPolygon`, `MultiLineString`, as well as `FeatureCollection`.
 
 Returns an array of intersection points eg, [[x1, y1], [x2, y2]] 
 
@@ -18,11 +18,19 @@ Returns an array of intersection points eg, [[x1, y1], [x2, y2]]
 
     const box = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]]}
     const intersections = findIntersections(box)
-    // returns an array of intersection points
+    // returns an array of self-intersection points
+````
+
+Also accepts an optional boolean argument second which when set to true means the module won't detect self-intersections and will only report intersections between different features. This defaults to false.
+eg 
+````js
+    const findIntersections = require('sweepline-intersections')
+    const intersectionsBetweenFeature = findIntersections(featureCollection, true)
+    // returns an array of intersection points between features
 ````
 
 ### Complex Use
-This library also provide a class-based approach which is helpful if you need to check multiple geometries against a single geometry. This allows you to save the state of the initial event queue with the primary geometry.
+This library also provide a class-based approach which is helpful if you want to check multiple geometries against a single geometry. This allows you to save the state of the initial event queue with the primary geometry.
 
 ````js
     import SweeplineIntersectionsClass from 'sweepline-intersections/dist/SweeplineIntersectionsClass'
@@ -40,7 +48,8 @@ This library also provide a class-based approach which is helpful if you need to
         // add another feature to test against your original data
         sl.addData(feature, origQueue)
         // check if those two features intersect
-        const intersectionPoints = sl.getIntersections()
+        // add an optional boolean argument to ignore self-intersections 
+        const intersectionPoints = sl.getIntersections(true)
     })
 ````
 
@@ -51,7 +60,7 @@ This library also provide a class-based approach which is helpful if you need to
 
 `.cloneEventQueue()` - clones the state of the existing event queue that's been populated with geojson. Returns a queue that you can pass to the `addData` method
 
-`.intersect()` - Checks for segment intersections. Returns `true` if there are no segment intersections or `false` if there are intersections.
+`.getIntersections(ignoreSelfIntersections)` - Checks for segment intersections. Accepts an optional boolean argument to ignore self intersections are only report intersections between features.
 
 
 ## Benchmarks

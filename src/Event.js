@@ -1,12 +1,14 @@
 
 export default class Event {
 
-    constructor (p, ringId) {
+    constructor (p, featureId, ringId, eventId) {
         this.p = {
             x: p[0],
             y: p[1]
         }
+        this.featureId = featureId
         this.ringId = ringId
+        this.eventId = eventId
 
         this.otherEvent = null
         this.isLeftEndpoint = null

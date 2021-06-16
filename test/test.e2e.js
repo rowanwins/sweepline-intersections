@@ -34,3 +34,13 @@ test('input data is not modified', (t) => {
     sweepline(geojson)
     t.deepEqual(geojson, clonedData)
 })
+
+test('ignoreSelfIntersections param works', (t) => {
+    const geojson = load.sync(path.join(__dirname, 'fixtures', 'notSimple', 'example.geojson'))
+    const selfIntersectionsIgnored = sweepline(geojson, true)
+    t.is(selfIntersectionsIgnored.length, 0)
+
+    const intersections = sweepline(geojson, false)
+    t.is(intersections.length, 3)
+    t.deepEqual(intersections[0], [19.88085507071179, -9.98118374351003])
+})
