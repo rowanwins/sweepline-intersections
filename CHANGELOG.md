@@ -1,3 +1,6 @@
+## 1.4.0
+- Add typsecript definitions
+
 ## 1.3.1
 - Bug fix for unintended output.
 
