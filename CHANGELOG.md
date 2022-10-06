@@ -1,3 +1,6 @@
+## 1.5.0
+- Add buble to rollup build
+
 ## 1.4.0
 - Add typsecript definitions
 

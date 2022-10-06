@@ -2,6 +2,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import strip from '@rollup/plugin-strip'
 import {terser} from 'rollup-plugin-terser'
+import buble from '@rollup/plugin-buble';
 
 const output = (input, file, format, plugins) => ({
     input,
@@ -18,6 +19,7 @@ export default [
     output('./src/main.js', './dist/sweeplineIntersections.js', 'umd', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
+        buble(),
         resolve()
     ]),
     output('./src/main.js', './dist/sweeplineIntersections.esm.js', 'esm', [
@@ -29,11 +31,13 @@ export default [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
         resolve(),
+        buble(),
         terser()
     ]),
     output('./src/SweeplineIntersections.js', './dist/SweeplineIntersectionsClass.js', 'umd', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
+        buble(),
         resolve()
     ]),
     output('./src/SweeplineIntersections.js', './dist/SweeplineIntersectionsClass.esm.js', 'esm', [
