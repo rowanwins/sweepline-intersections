@@ -10,12 +10,13 @@ export default function runCheck (eventQueue, ignoreSelfIntersections) {
 
     const intersectionPoints = []
     const outQueue = new TinyQueue([], checkWhichSegmentHasRightEndpointFirst)
-
+    let segmentId = 0
     while (eventQueue.length) {
         const event = eventQueue.pop()
         if (event.isLeftEndpoint) {
             // debugEventAndSegments(event.p, outQueue.data)
-            const segment = new Segment(event)
+            const segment = new Segment(event, segmentId)
+            segmentId = segmentId + 1
             for (let i = 0; i < outQueue.data.length; i++) {
                 const otherSeg = outQueue.data[i]
                 if (ignoreSelfIntersections) {

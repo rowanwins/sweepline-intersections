@@ -42,5 +42,5 @@ test('ignoreSelfIntersections param works', (t) => {
 
     const intersections = sweepline(geojson, false)
     t.is(intersections.length, 3)
-    t.deepEqual(intersections[0], [19.88085507071179, -9.98118374351003])
+    t.deepEqual(intersections[0].intersection, [19.88085507071179, -9.98118374351003])
 })
