@@ -1,3 +1,6 @@
+## 1.6.0
+- More robust detection of intersections (inc on endpoints)
+
 ## 1.5.0
 - Add buble to rollup build
 

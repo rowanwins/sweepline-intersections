@@ -17,5 +17,9 @@ export default class Event {
     isSamePoint (eventToCheck) {
         return this.p.x === eventToCheck.p.x && this.p.y === eventToCheck.p.y
     }
+
+    asNewXY () {
+        return [this.p.x, this.p.y]
+    }
 }
 

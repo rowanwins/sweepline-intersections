@@ -1,12 +1,7 @@
+import {orient2d} from 'robust-predicates'
+
 export function testSegmentIntersect (seg1, seg2) {
     if (seg1 === null || seg2 === null) return false
-
-    if (seg1.leftSweepEvent.ringId === seg2.leftSweepEvent.ringId &&
-        (seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
-        seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
-        seg1.rightSweepEvent.isSamePoint(seg2.rightSweepEvent) ||
-        seg1.leftSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
-        seg1.leftSweepEvent.isSamePoint(seg2.rightSweepEvent))) return false
 
     const x1 = seg1.leftSweepEvent.p.x
     const y1 = seg1.leftSweepEvent.p.y
@@ -16,6 +11,27 @@ export function testSegmentIntersect (seg1, seg2) {
     const y3 = seg2.leftSweepEvent.p.y
     const x4 = seg2.rightSweepEvent.p.x
     const y4 = seg2.rightSweepEvent.p.y
+
+    const score1 = orient2d(x1, y1, x2, y2, x3, y3)
+    const score2 = orient2d(x1, y1, x2, y2, x4, y4)
+
+    if (score1 > 0 && score2 > 0) return false
+    else if (score1 < 0 && score2 < 0) return false
+
+    if (seg1.leftSweepEvent.ringId === seg2.leftSweepEvent.ringId) {
+        if (
+            seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
+            seg1.rightSweepEvent.isSamePoint(seg2.rightSweepEvent) ||
+            seg1.leftSweepEvent.isSamePoint(seg2.leftSweepEvent) ||
+            seg1.leftSweepEvent.isSamePoint(seg2.rightSweepEvent)
+        ) return false
+    } else {
+        if (seg1.rightSweepEvent.isSamePoint(seg2.leftSweepEvent)) return seg2.leftSweepEvent.asNewXY()
+        if (seg1.rightSweepEvent.isSamePoint(seg2.rightSweepEvent)) return seg2.rightSweepEvent.asNewXY()
+        if (seg1.leftSweepEvent.isSamePoint(seg2.leftSweepEvent)) return seg2.leftSweepEvent.asNewXY()
+        if (seg1.leftSweepEvent.isSamePoint(seg2.rightSweepEvent)) return seg2.rightSweepEvent.asNewXY()
+    }
+
 
     const denom = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1))
     const numeA = ((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3))
