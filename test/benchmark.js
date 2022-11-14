@@ -60,14 +60,12 @@ suite2
     .run()
 
 // Chile - Vertical geometry (17,000 vertices)
-// bentleyOttmann x 50.22 ops/sec ±1.75% (65 runs sampled)
 // sweepline x 35.64 ops/sec ±1.20% (62 runs sampled)
-// - Fastest is bentleyOttmann (although doesn't find intersection)
 const suite3 = new Benchmark.Suite('Chile - Vertical geometry (17,000 vertices)', options)
 suite3
-    .add('bentleyOttmann', function () {
-        bentleyOttmann(chile)
-    })
+    // .add('bentleyOttmann', function () {
+    //     bentleyOttmann(chile)
+    // })
     .add('sweepline', function () {
         sweepline(chile)
     })

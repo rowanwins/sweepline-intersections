@@ -83,9 +83,7 @@ Tested against
 // - Fastest is sweepline (this library)
 
 // Chile - Vertical geometry (17,000 vertices)
-// bentleyOttmann x 50.22 ops/sec ±1.75% (65 runs sampled)
 // sweepline x 35.64 ops/sec ±1.20% (62 runs sampled)
-// - Fastest is bentleyOttmann (although it doesn't find intersection)
 ````
 
 ## Contributing
