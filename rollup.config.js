@@ -10,7 +10,7 @@ const output = (input, file, format, plugins) => ({
         name: 'sweeplineIntersections',
         file,
         format,
-        exports: 'default'
+        exports: 'named'
     },
     plugins
 })
