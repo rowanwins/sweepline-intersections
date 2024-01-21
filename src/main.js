@@ -9,4 +9,3 @@ export default function sweeplineIntersections (geojson, ignoreSelfIntersections
     fillEventQueue(geojson, eventQueue)
     return runCheck(eventQueue, ignoreSelfIntersections)
 }
-
