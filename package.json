@@ -1,6 +1,6 @@
 {
   "name": "sweepline-intersections",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "A module to check if a polygon self-intersects using a sweepline algorithm",
   "main": "dist/sweeplineIntersections.js",

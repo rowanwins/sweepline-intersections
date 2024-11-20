@@ -1,5 +1,6 @@
-## 1.6.0
+## 2.0.0
 - More robust detection of intersections (inc on endpoints)
+- Remove webpack and ava as dev dependencies, and move to vite & vitest
 
 ## 1.5.0
 - Add buble to rollup build
