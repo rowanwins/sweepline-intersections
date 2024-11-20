@@ -1,14 +1,15 @@
-const path = require('path')
-const Benchmark = require('benchmark')
-const sweepline = require('../dist/sweeplineIntersections.js')
-const bentleyOttmann = require('bentley-ottmann-intersections')
-const gpsi = require('geojson-polygon-self-intersections')
-const isects = require('2d-polygon-self-intersections')
-const loadJsonFile = require('load-json-file')
+import path from 'path'
+import Benchmark from 'benchmark'
+import bentleyOttmann from 'bentley-ottmann-intersections'
+import gpsi from 'geojson-polygon-self-intersections'
+import isects from '2d-polygon-self-intersections'
+import loadJsonFile from 'load-json-file'
 
-const regression = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'example1.geojson'))
-const switzerland = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
-const chile = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'chileKinked.geojson'))
+import sweepline from '../dist/sweeplineIntersections.esm.js'
+
+const regression = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'example1.geojson'))
+const switzerland = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
+const chile = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'chileKinked.geojson'))
 
 const options = {
     onStart () { console.log(this.name) },
@@ -60,14 +61,12 @@ suite2
     .run()
 
 // Chile - Vertical geometry (17,000 vertices)
-// bentleyOttmann x 50.22 ops/sec ±1.75% (65 runs sampled)
 // sweepline x 35.64 ops/sec ±1.20% (62 runs sampled)
-// - Fastest is bentleyOttmann (although doesn't find intersection)
 const suite3 = new Benchmark.Suite('Chile - Vertical geometry (17,000 vertices)', options)
 suite3
-    .add('bentleyOttmann', function () {
-        bentleyOttmann(chile)
-    })
+    // .add('bentleyOttmann', function () {
+    //     bentleyOttmann(chile)
+    // })
     .add('sweepline', function () {
         sweepline(chile)
     })

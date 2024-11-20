@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "expectedIntersections": 1
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.388349,
+            39.949004
+          ],
+          [
+            116.409595,
+            39.900803
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+          "type": "LineString",
+          "coordinates": [
+              [
+                  116.409595,
+                  39.900803
+              ],
+              [
+                  116.447661,
+                  39.896049
+              ]
+          ]
+      }
+    }
+  ]
+}
