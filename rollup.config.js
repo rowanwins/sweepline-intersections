@@ -1,8 +1,8 @@
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import strip from '@rollup/plugin-strip'
-import {terser} from 'rollup-plugin-terser'
-import buble from '@rollup/plugin-buble';
+import terser from '@rollup/plugin-terser'
+import buble from '@rollup/plugin-buble'
 
 const output = (input, file, format, plugins) => ({
     input,

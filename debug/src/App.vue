@@ -18,13 +18,12 @@ L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
     shadowUrl: markerShadow
 })
-
-const trouble = require('../../test/fixtures/simple/MultiLinestring.geojson')
+import data from '../../test/fixtures/notSimple/chileKinked.geojson'
 
 export default {
     name: 'App',
     mounted () {
-        const layer = L.geoJSON(trouble)
+        const layer = L.geoJSON(data)
 
         let map = window.map = L.map('app', {
             crs: L.CRS.Simple
@@ -35,7 +34,7 @@ export default {
 
         map.addControl(new L.Coordinates())
 
-        const intersections = sweepline(trouble)
+        const intersections = sweepline(data)
         const layerGroup = L.layerGroup([]).addTo(map)
 
         intersections.forEach(function (ip) {

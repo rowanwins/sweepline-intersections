@@ -1,14 +1,15 @@
-const path = require('path')
-const Benchmark = require('benchmark')
-const sweepline = require('../dist/sweeplineIntersections.js')
-const bentleyOttmann = require('bentley-ottmann-intersections')
-const gpsi = require('geojson-polygon-self-intersections')
-const isects = require('2d-polygon-self-intersections')
-const loadJsonFile = require('load-json-file')
+import path from 'path'
+import Benchmark from 'benchmark'
+import bentleyOttmann from 'bentley-ottmann-intersections'
+import gpsi from 'geojson-polygon-self-intersections'
+import isects from '2d-polygon-self-intersections'
+import loadJsonFile from 'load-json-file'
 
-const regression = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'example1.geojson'))
-const switzerland = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
-const chile = loadJsonFile.sync(path.join(__dirname, 'fixtures', 'notSimple', 'chileKinked.geojson'))
+import sweepline from '../dist/sweeplineIntersections.esm.js'
+
+const regression = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'example1.geojson'))
+const switzerland = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'switzerlandKinked.geojson'))
+const chile = loadJsonFile.sync(path.join('test', 'fixtures', 'notSimple', 'chileKinked.geojson'))
 
 const options = {
     onStart () { console.log(this.name) },
