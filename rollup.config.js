@@ -16,7 +16,7 @@ const output = (input, file, format, plugins) => ({
 })
 
 export default [
-    output('./src/main.js', './dist/sweeplineIntersections.js', 'umd', [
+    output('./src/main.js', './dist/sweeplineIntersections.cjs', 'umd', [
         strip(['debugEventAndSegments', 'debugRemovingSegment']),
         commonjs(),
         buble(),

@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "type": "module",
   "description": "A module to check if a polygon self-intersects using a sweepline algorithm",
-  "main": "dist/sweeplineIntersections.js",
+  "main": "dist/sweeplineIntersections.cjs",
   "module": "dist/sweeplineIntersections.esm.js",
   "unpkg": "dist/sweeplineIntersections.min.js",
   "jsdelivr": "dist/sweeplineIntersections.min.js",
-  "typings": "types.d.ts",
+  "typings": "types.d.cts",
   "scripts": {
     "bench": "npm run build && node test/benchmark.js",
     "build": "rollup -c",
@@ -16,7 +16,7 @@
   },
   "files": [
     "dist/",
-    "types.d.ts"
+    "types.d.cts"
   ],
   "author": "",
   "license": "MIT",
